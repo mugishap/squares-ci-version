@@ -15,7 +15,7 @@
                 <div class="form-group">
                     <label class="col-md-3">Title</label>
                     <div class="col-md-9">
-                        <input type="text" name="title" class="form-control">
+                        <input type="text" name="title" class="form-control" required>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label class="col-md-3">Description</label>
                     <div class="col-md-9">
-                        <textarea name="description" class="form-control"></textarea>
+                        <textarea name="description" class="form-control" required></textarea>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label class="col-md-3">Price</label>
                     <div class="col-md-9">
-                        <input name="price" class="form-control" type="number">
+                        <input name="price" class="form-control" type="number" required>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label class="col-md-3">Amount</label>
                     <div class="col-md-9">
-                        <input name="amount" class="form-control" type="number">
+                        <input name="amount" class="form-control" type="number" required>
                     </div>
                 </div>
             </div>
