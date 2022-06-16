@@ -53,9 +53,17 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-
+//Product management routes
 $route['products'] = "products/index";
 $route['productsCreate']['post'] = "products/store";
 $route['productsEdit/(:any)'] = "products/edit/$1";
 $route['productsUpdate/(:any)']['put'] = "products/update/$1";
 $route['productsDelete/(:any)']['delete'] = "products/delete/$1";
+
+//User management routes
+$route['users'] = "users/index";
+$route['usersCreate']['post'] = "users/create";
+$route['usersEdit/(:any)'] = "users/edit/$1";
+$route['usersUpdate/(:any)']['put'] = "users/edit/$1";
+$route['usersDelete/(:any)']['delete'] = "users/delete/$1";
+$route['usersSearch/(:any)'] = "users/search/$1";

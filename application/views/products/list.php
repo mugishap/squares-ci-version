@@ -43,8 +43,8 @@
 
                             <td>
                                 <form method="DELETE" action="<?php echo base_url('products/delete/' . $d->entry_id); ?>">
-                                    <a class="btn btn-info btn-xs" href="<?php echo base_url('products/edit/' . $d->entry_id) ?>">
-                                        <i class="fa fa-pen-to-square"></i></a>
+                                <a class="btn btn-info btn-xs" href="<?php echo base_url('products/edit/' . $d->entry_id) ?>">
+                                    <i class="fa fa-pen-to-square"></i></a>
                                     <button type="submit" class="btn btn-danger btn-xs">
                                         <i class="fa fa-trash"></i></button>
                                 </form>
