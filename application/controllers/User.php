@@ -35,6 +35,10 @@ class User extends CI_Controller {
     }
     public function searchuser($username){
         $user = $this->db->like('users',['user_id'=>$username])->row();
+        $data['type'] = 'user';
+        $this->load->view('includes/header',$data);
+        $this->load->view('users/search', ['user' => $user]);
+        $this->load->view('includes/footer');
     }
 }
 
