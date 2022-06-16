@@ -12,13 +12,15 @@ class Products extends CI_Controller {
     public function index(){
         $products = new ProductsModel();
         $data['data'] = $products->get_products();
-        $this->load->view('includes/header');
+        $data['type'] = 'product';
+        $this->load->view('includes/header',$data);
         $this->load->view('products/list', $data);
         $this->load->view('includes/footer');
     }
 
     public function create(){
-        $this->load->view('includes/header');
+        $data['type'] = 'product';
+        $this->load->view('includes/header',$data);
         $this->load->view('products/create');
         $this->load->view('includes/footer');
     }
@@ -29,7 +31,8 @@ class Products extends CI_Controller {
     }
     public function edit($id){
         $product = $this->db->get_where('entries', ['entry_id' => $id])->row();
-        $this->load->view('includes/header');
+        $data['type'] = 'product';
+        $this->load->view('includes/header',$data);
         $this->load->view('products/edit', ['product' => $product]);
         $this->load->view('includes/footer');
     }
@@ -39,6 +42,7 @@ class Products extends CI_Controller {
         redirect(base_url('products'));
     }
     public function delete($id){
+        
         $this->db->where('entry_id',$id);
         $this->db->delete('entries');
         redirect(base_url('products'));
