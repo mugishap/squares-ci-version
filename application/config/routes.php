@@ -49,25 +49,41 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //App management routes
 $route['home'] = 'home';
 
-//Product management routes
+//**********Product management routes**************
 $route['products'] = "products/index";
 $route['productsCreate']['post'] = "products/store";
 $route['productsEdit/(:any)'] = "products/edit/$1";
 $route['productsUpdate/(:any)']['post'] = "products/update/$1";
 $route['productsDelete/(:any)']['delete'] = "products/delete/$1";
 
-//User management routes
+
+
+//**********User management routes**********
+//Get all users route
 $route['users'] = "users";
+
+//Account page description
+$route['account/(:any)'] = "users/account/$1";
+
+//Create user ccount route and login route
 $route['usersCreate']['post'] = "users/create";
+$route['usersLogin']['post'] = "users/login";
+
+//Edit user accounts form, 
 $route['usersEdit/(:any)'] = "users/edit/$1";
+
+//UPDATE DELETE AND SEARCH
 $route['usersUpdate/(:any)']['post'] = "users/update/$1";
 $route['usersDelete/(:any)']['delete'] = "users/delete/$1";
 $route['usersSearch/(:any)'] = "users/search/$1";
-$route['usersLogin']['post'] = "users/login";
+
+//get login and signup views
+$route['signup/form'] = "users/signupform";
+$route['login/form'] = "users/loginform";
