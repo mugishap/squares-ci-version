@@ -16,24 +16,20 @@
                     <th>Email</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Created</th>
-                    <th>Modified</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($users as $user) { ?>
                     <tr>
-                        <td><?php echo $user['id']; ?></td>
-                        <td><?php echo $user['username']; ?></td>
-                        <td><?php echo $user['email']; ?></td>
-                        <td><?php echo $user['first_name']; ?></td>
-                        <td><?php echo $user['last_name']; ?></td>
-                        <td><?php echo $user['created']; ?></td>
-                        <td><?php echo $user['modified']; ?></td>
+                        <td><?= $user->count ?></td>
+                        <td><?= $user->username ?></td>
+                        <td><?= $user->email ?></td>
+                        <td><?= $user->firstname ?></td>
+                        <td><?= $user->lastname ?></td>
                         <td>
-                            <a href="<?php echo site_url('users/edit/' . $user['id']); ?>" class="btn btn-info">Edit</a>
-                            <a href="<?php echo site_url('users/delete/' . $user['id']); ?>" class="btn btn-danger">Delete</a>
+                            <a href="<?= site_url('users/edit/' . $user->user_id); ?>" class="btn btn-info">Edit</a>
+                            <a href="<?= site_url('users/delete/' . $user->user_id)?>" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 <?php } ?>

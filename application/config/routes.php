@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -53,17 +53,21 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+//App management routes
+$route['home'] = 'home';
+
 //Product management routes
 $route['products'] = "products/index";
 $route['productsCreate']['post'] = "products/store";
 $route['productsEdit/(:any)'] = "products/edit/$1";
-$route['productsUpdate/(:any)']['put'] = "products/update/$1";
+$route['productsUpdate/(:any)']['post'] = "products/update/$1";
 $route['productsDelete/(:any)']['delete'] = "products/delete/$1";
 
 //User management routes
-$route['users'] = "users/index";
+$route['users'] = "users";
 $route['usersCreate']['post'] = "users/create";
 $route['usersEdit/(:any)'] = "users/edit/$1";
-$route['usersUpdate/(:any)']['put'] = "users/edit/$1";
+$route['usersUpdate/(:any)']['post'] = "users/update/$1";
 $route['usersDelete/(:any)']['delete'] = "users/delete/$1";
 $route['usersSearch/(:any)'] = "users/search/$1";
+$route['usersLogin']['post'] = "users/login";

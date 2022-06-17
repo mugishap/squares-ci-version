@@ -14,26 +14,26 @@ class Products extends CI_Controller {
         $data['data'] = $products->get_products();
         $data['type'] = 'product';
         $this->load->view('includes/header',$data);
-        $this->load->view('products/list', $data);
+        $this->load->view('html/products/list', $data);
         $this->load->view('includes/footer');
     }
 
     public function create(){
         $data['type'] = 'product';
         $this->load->view('includes/header',$data);
-        $this->load->view('products/create');
+        $this->load->view('html/products/create');
         $this->load->view('includes/footer');
     }
     public function store(){
         $products = new ProductsModel();
         $products->insert_product();
-        redirect(base_url('products'));
+        redirect(base_url('html/products'));
     }
     public function edit($id){
         $product = $this->db->get_where('entries', ['entry_id' => $id])->row();
         $data['type'] = 'product';
         $this->load->view('includes/header',$data);
-        $this->load->view('products/edit', ['product' => $product]);
+        $this->load->view('html/products/edit', ['product' => $product]);
         $this->load->view('includes/footer');
     }
     public function update($id){
