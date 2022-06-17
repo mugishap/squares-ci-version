@@ -11,12 +11,11 @@
   <meta content="" name="keywords">
 
 
-  <link href="logo.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+<link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">  
-<link href="<?=base_url()?>'assets/styles.css'" media="all" rel="stylesheet">
+<link href="<?=base_url()?>assets/styles.css" media="all" rel="stylesheet">
 
 </head>
 
@@ -26,7 +25,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="logo.png" alt="">
+        <img src="assets/logo.png" alt="">
         <span>Squares</span>
       </a>
 
@@ -1232,7 +1231,7 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 
-  <script src="main.js"></script>
+  <script src="assets/main.js"></script>
 
 </body>
 
