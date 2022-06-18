@@ -11,7 +11,7 @@ class Products extends CI_Controller {
 
 public function getpdf(){
     $data['products'] = $this->ProductsModel->get_products();
-    $this->pdf->load_view('html/products/pdf', $data);
+    $this->load->view('html/products/pdf', $data);
 }
 
     public function index(){

@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 </head>
 
 <body>
@@ -19,18 +16,16 @@
         <div class="col-3 bg-primary">
         </div>
         <div class="col-lg-12">
-
             <div class="pull-right">
-                <a class="btn btn-primary" href="<?php echo base_url('products/create') ?>"> Create New Product</a>
+                <a class="btn btn-primary m-2" href="<?php echo base_url('products/create') ?>"> Create New Product</a>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="<?php echo base_url('products/getpdf') ?>">Download PDF</a>
+            <div class="pull-right m-2">
+                <a class="btn btn-primary" href="<?php echo base_url('products/getpdf') ?>">View PDF</a>
             </div>
-
         </div>
     </div>
     <div class="table-responsive">
-        <table id="exampletable" class="table table-striped" style="width:100%">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -62,16 +57,7 @@
             </tbody>
         </table>
     </div>
-    <script>
-        $(document).ready(function() {
-            $('#exampletable').DataTable({
-                pagingType: 'full_numbers',
-            });
-        });
-    </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
 </body>
 
 </html>
