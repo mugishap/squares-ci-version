@@ -14,15 +14,25 @@ class UsersModel extends CI_Model
     }
     public function insert_user()
     {
-        if (!empty($this->input->post("firstname")) || !empty($this->input->post("lastname")) || !empty($this->input->post("username")) || !empty($this->input->post("company")) || !empty($this->input->post("email")) || !empty($this->input->post("password"))) {
-            $data = array(
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[10]|max_length[15]|is_unique[users.username]|alpha_numeric');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|alpha_numeric|min_length[8]|max_length[15]');
+        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'matches[password]|alpha_numeric');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', 'Please fill in all the fields');
+            return false;
+        } else {
+
+            $data = [
                 'firstname' => $this->input->post('firstname'),
                 'lastname' => $this->input->post('lastname'),
                 'username' => $this->input->post('username'),
                 'email' => $this->input->post('email'),
-                'company' => $this->input->post('company'),
                 'password' => $this->input->post('password')
-            );
+            ];
             return $this->db->insert('users', $data);
         }
     }

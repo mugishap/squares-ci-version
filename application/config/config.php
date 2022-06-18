@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/myapp/Study2/squares-ci-version/';
+$config['base_url'] = 'http://localhost/Lessons/squares/';
 
 /*
 |--------------------------------------------------------------------------

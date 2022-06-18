@@ -26,11 +26,17 @@ class Users extends CI_Controller
     }
     public function create()
     {
-        $this->load->library('session');
+        $users = new UsersModel();
         $data['type'] = 'user';
-        $this->load->view('includes/header', $data);
-        $this->load->view('html/users/create');
-        $this->load->view('includes/footer');
+        $data['user'] = $users->insert_user();
+        if ($data['user']) {
+            redirect(base_url().'products');
+        } else {
+            $this->session->set_flashdata('msg', 'User creation failed');
+            $this->load->view('includes/header', $data);
+            $this->load->view('msg', $data);
+            $this->load->view('includes/footer');
+        }
     }
     public function edit($id)
     {
@@ -103,8 +109,7 @@ class Users extends CI_Controller
         redirect(base_url('users'));
     }
     public function signupform(){
-        $data['type'] = 'user';
-        $this->load->view('includes/header', $data);
+        $data['type'] = 'Signup';
         $this->load->view('html/users/signup');
         $this->load->view('includes/footer');
     }

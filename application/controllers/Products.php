@@ -9,6 +9,11 @@ class Products extends CI_Controller {
         $this->load->model('ProductsModel');
     }
 
+public function getpdf(){
+    $data['products'] = $this->ProductsModel->get_products();
+    $this->pdf->load_view('html/products/pdf', $data);
+}
+
     public function index(){
         $products = new ProductsModel();
         $data['data'] = $products->get_products();
@@ -27,7 +32,7 @@ class Products extends CI_Controller {
     public function store(){
         $products = new ProductsModel();
         $products->insert_product();
-        redirect(base_url('html/products'));
+        redirect(base_url('products'));
     }
     public function edit($id){
         $product = $this->db->get_where('entries', ['entry_id' => $id])->row();
@@ -49,5 +54,3 @@ class Products extends CI_Controller {
     }
 
 }
-
-?>
