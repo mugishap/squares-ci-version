@@ -57,11 +57,21 @@ $route['translate_uri_dashes'] = FALSE;
 $route['home'] = 'home';
 
 //**********Product management routes**************
+//All products
 $route['products'] = "products/index";
+
+//Create product
 $route['productsCreate']['post'] = "products/store";
+
+//Edit product form and controller
 $route['productsEdit/(:any)'] = "products/edit/$1";
 $route['productsUpdate/(:any)']['post'] = "products/update/$1";
+
+//Delete a product
 $route['productsDelete/(:any)']['delete'] = "products/delete/$1";
+
+//Get the pdf version of products
+$route['products-pdf-view'] = "pdf";
 
 
 
