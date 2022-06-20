@@ -61,7 +61,7 @@ $route['home'] = 'home';
 $route['products'] = "products/index";
 
 //Create product
-$route['productsCreate']['post'] = "products/store";
+$route['productsCreate']['post'] = "products/create";
 
 //Edit product form and controller
 $route['productsEdit/(:any)'] = "products/edit/$1";

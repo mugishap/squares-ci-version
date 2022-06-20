@@ -14,13 +14,12 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="<?= base_url() ?>">Squares</a>
             </div>
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav d-flex align-items-center">
                 <li class=""><a href="#">Home</a></li>
                 <li class="active"><a href="<?= base_url('users') ?>">Users</a></li>
                 <li><a href="<?= base_url('products') ?>">Products</a></li>
                 <li><a href="<?= base_url() . 'user/' . $this->session->userdata('user_id') ?>">Account</a></li>
-                <li><a class="btn btn-primary color-white" href="<?= base_url('logout') ?>">Logout</a></li>
-            </ul>
+                <li class="pull-right"><a style="padding: 0 !important;" href="<?= base_url('logout') ?>"><button class="btn btn-primary"  >Logout</button></a></li>            </ul>
         </div>
     </nav>
     <div class="table">
@@ -49,15 +48,15 @@
                             if ($this->session->userdata('username') != $user->username) {
                             ?>
                                 <button style="cursor:not-allowed;" class="btn btn-secondary ">Edit</a>
-                                <button style="cursor: not-allowed;" class="btn btn-secondary">Delete</a>
-                            <?php
-                            } else {
-                            ?>
-                                <a href="<?= base_url('update/form'); ?>" class="btn btn-info">Edit</a>
-                                <a href="<?= base_url('usersDelete/' . $user->user_id) ?>" class="btn btn-danger">Delete</a>
-                            <?php
-                            }
-                            ?>
+                                    <button style="cursor: not-allowed;" class="btn btn-secondary">Delete</a>
+                                    <?php
+                                } else {
+                                    ?>
+                                        <a href="<?= base_url('update/form'); ?>" class="btn btn-info">Edit</a>
+                                        <a href="<?= base_url('usersDelete/' . $user->user_id) ?>" class="btn btn-danger">Delete</a>
+                                    <?php
+                                }
+                                    ?>
                         </td>
                     </tr>
                 <?php } ?>
