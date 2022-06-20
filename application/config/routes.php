@@ -89,6 +89,9 @@ $route['usersLogin']['post'] = "users/login";
 //Edit user accounts form, 
 $route['usersEdit/(:any)'] = "users/edit/$1";
 
+//View account
+$route['user/(:any)'] = "users/account/$1";
+
 //UPDATE DELETE AND SEARCH
 $route['usersUpdate/(:any)']['post'] = "users/update/$1";
 $route['usersDelete/(:any)']['delete'] = "users/delete/$1";

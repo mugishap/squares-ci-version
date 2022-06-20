@@ -7,6 +7,20 @@
     <title>All users</title>
 </head>
 <body>
+<nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="<?=base_url()?>">Squares</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class=""><a href="#">Home</a></li>
+                <li class="active"><a href="<?=base_url('users')?>">Users</a></li>
+                <li><a href="<?=base_url('products')?>">Products</a></li>
+                <li><a href="#">Account</a></li>
+                <li><a class="btn btn-primary color-white" href="<?=base_url('logout')?>">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="table">
         <table class="table table-striped table-bordered table-hover">
             <thead>

@@ -7,38 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squares product list</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
-<body>
+<body class="d-flex align-items-center justify-content-center">
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">WebSiteName</a>
+            <img class="navbar-header" width=70 height=50 src="<?=base_url('assets/logo.png')?>" alt="">
+            <div class="navbar-header mr-5">
+                <a class="navbar-brand" href="<?= base_url() ?>">Squares</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
-                <li><a class="btn btn-primary color-white" href="<?=base_url('logout')?>">Logout</a></li>
+                <li class=""><a href="#">Home</a></li>
+                <li><a href="<?= base_url('users') ?>">Users</a></li>
+                <li class="active"><a href="<?= base_url('products') ?>">Products</a></li>
+                <li><a href="<?= base_url() . 'user/' . $this->session->userdata('user_id') ?>">Account</a></li>
+                <li><a class="btn btn-primary" href="<?= base_url('logout') ?>">Logout</a></li>
             </ul>
         </div>
     </nav>
     </div>
     <div class="row d-flex">
-        <div class="col-3 bg-primary">
-        </div>
-        <div class="col-lg-12">
+
+        <div class="col-lg-10">
             <div class="pull-right">
-                <a class="btn btn-primary mx-5" href="<?php echo base_url('products/create') ?>"> Create New Product</a>
-                <a class="btn btn-primary mx-5" href="<?php echo base_url('products/getpdf') ?>">View PDF</a>
+                <a class="btn btn-primary" href="<?php echo base_url('products/create') ?>"> Create New Product</a>
+                <a class="btn btn-primary" href="<?php echo base_url('products/getpdf') ?>">View PDF</a>
             </div>
         </div>
     </div>
-    <div class="table-responsive col-6">
+    <div class="table-responsive col-lg-11">
         <table class="table table-bordered ">
             <thead>
                 <tr>
