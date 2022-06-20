@@ -97,3 +97,4 @@ $route['usersSearch/(:any)'] = "users/search/$1";
 //get login and signup views
 $route['signup/form'] = "users/signupform";
 $route['login/form'] = "users/loginform";
+$route['logout'] = "users/logout";

@@ -12,20 +12,34 @@
 </head>
 
 <body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">WebSiteName</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li>
+                <li><a href="#">Page 3</a></li>
+                <li><a class="btn btn-primary color-white" href="<?=base_url('logout')?>">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    </div>
     <div class="row d-flex">
         <div class="col-3 bg-primary">
         </div>
         <div class="col-lg-12">
             <div class="pull-right">
-                <a class="btn btn-primary m-2" href="<?php echo base_url('products/create') ?>"> Create New Product</a>
-            </div>
-            <div class="pull-right m-2">
-                <a class="btn btn-primary" href="<?php echo base_url('products/getpdf') ?>">View PDF</a>
+                <a class="btn btn-primary mx-5" href="<?php echo base_url('products/create') ?>"> Create New Product</a>
+                <a class="btn btn-primary mx-5" href="<?php echo base_url('products/getpdf') ?>">View PDF</a>
             </div>
         </div>
     </div>
-    <div class="table-responsive">
-        <table class="table table-bordered">
+    <div class="table-responsive col-6">
+        <table class="table table-bordered ">
             <thead>
                 <tr>
                     <th>Title</th>

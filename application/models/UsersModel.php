@@ -5,25 +5,22 @@ class UsersModel extends CI_Model
 
     public function get_users()
     {
-        // if (!empty($this->input->get("search"))) {
-        //     $this->db->like('title', $this->input->get("search"));
-        //     $this->db->or_like('description', $this->input->get("search"));
-        // }
+
         $query = $this->db->get("users");
         return $query->result();
     }
     public function insert_user()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
-        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[10]|max_length[15]|is_unique[users.username]|alpha_numeric');
+        $this->form_validation->set_rules('firstname', 'First Name', 'trim|required|min_length[3]|max_length[20]');
+        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|min_length[3]|max_length[20]');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]|max_length[15]|is_unique[users.username]|alpha_numeric');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|alpha_numeric|min_length[8]|max_length[15]');
-        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'matches[password]|alpha_numeric');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[15]');
+        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'matches[password]');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('error', 'Please fill in all the fields');
-            return false;
+            return [false, $this->form_validation->error_array()];
         } else {
 
             $data = [
@@ -31,9 +28,11 @@ class UsersModel extends CI_Model
                 'lastname' => $this->input->post('lastname'),
                 'username' => $this->input->post('username'),
                 'email' => $this->input->post('email'),
-                'password' => $this->input->post('password')
+                'password' => hash("SHA512", $this->input->post('password'))
             ];
-            return $this->db->insert('users', $data);
+            $this->db->insert('users', $data);
+            $userid = $this->get_user_by_username($this->input->post('username'))->user_id;
+            return [true, $userid];
         }
     }
     public function update_user($id)
@@ -75,11 +74,20 @@ class UsersModel extends CI_Model
         $query = $this->db->get('users');
         return $query->row();
     }
-    public function login($username, $password)
+    public function loginAfterSignup($username, $password)
     {
         $this->db->where('username', $username);
-        $this->db->where('password', $password);
+        $this->db->where('password', hash("SHA512", $password));
         $query = $this->db->get('users');
-        return $query->row();
+        if ($query->num_rows() == 1) {
+            $this->session->set_userdata('user_id', $query->row()->user_id);
+            $this->session->set_userdata('username', $query->row()->username);
+            $this->session->set_userdata('firstname', $query->row()->firstname);
+            $this->session->set_userdata('lastname', $query->row()->lastname);
+            $this->session->set_userdata('email', $query->row()->email);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
