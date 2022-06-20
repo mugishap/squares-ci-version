@@ -10,6 +10,17 @@
 
 <body>
     <div class="col-lg-6">
+        <?php
+        if (isset($error)) {
+        ?>
+            <div class="alert alert-danger" role="alert">
+                <?php
+                echo $error;
+                ?>
+            </div>
+        <?php
+        }
+        ?>
         <form action="<?= base_url() . 'usersLogin' ?>" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
@@ -22,8 +33,8 @@
             <button type="submit" name="login">Submit</button>
 
         </form>
-        <p>New to squares?   <a href="<?=base_url('signup/form')?>">Signup</a></p>
-        <p>Forgot password?</p><a href="base_url('resetpassword/home')">Reset password</a>
+        <p>New to squares? <a href="<?= base_url('signup/form') ?>">Signup</a></p>
+        <p>Forgot password?</p><a href="<?= base_url('resetpassword/home') ?>">Reset password</a>
     </div>
 </body>
 

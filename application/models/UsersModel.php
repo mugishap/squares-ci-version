@@ -15,7 +15,7 @@ class UsersModel extends CI_Model
         $this->form_validation->set_rules('firstname', 'First Name', 'trim|required|min_length[3]|max_length[20]');
         $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|min_length[3]|max_length[20]');
         $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]|max_length[15]|is_unique[users.username]|alpha_numeric');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|unique');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[15]');
         $this->form_validation->set_rules('cpassword', 'Confirm Password', 'matches[password]');
         if ($this->form_validation->run() == FALSE) {
@@ -72,15 +72,33 @@ class UsersModel extends CI_Model
     }
     public function get_user_by_username($username)
     {
-        $this->db->where('username', $username);
-        $query = $this->db->get('users');
-        return $query->row();
+        $this->load->libraries('form_validation');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]|max_length[15]|alpha_numeric');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', 'Please fill in all the fields');
+            return [false, $this->form_validation->error_array()];
+        } else {
+            $this->db->where('username', $username);
+            $query = $this->db->get('users');
+            return $query->row();
+        }
     }
     public function get_user_by_email($email)
     {
-        $this->db->where('email', $email);
-        $query = $this->db->get('users');
-        return $query->row();
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', 'Please fill in all the fields');
+            return [false, $this->form_validation->error_array()];
+        } else {
+
+            $this->db->where('email', $email);
+            $query = $this->db->get('users');
+            if ($query->num_rows() == 1) {
+                return [true, $query->row()];
+            } else {
+                return [false, $query->num_rows()];
+            }
+        }
     }
     public function loginAfterSignup($username, $password)
     {
@@ -96,6 +114,21 @@ class UsersModel extends CI_Model
             return true;
         } else {
             return false;
+        }
+    }
+    public function reset_password($email, $password)
+    {
+        $this->db->where('email', $email);
+        $data = ['password' => hash("SHA512", $password)];
+        $this->db->update('users', $data);
+
+        $newpassword = hash("SHA512", $password);
+        $this->db->where('email', $email);
+        $user = $this->db->get('users');
+        if ($user->password == $newpassword) {
+            return [true, $user->user_id];
+        } else {
+            return [false, $this->db->affected_rows()];
         }
     }
 }

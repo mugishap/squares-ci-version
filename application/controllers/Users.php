@@ -143,7 +143,11 @@ class Users extends CI_Controller
                 }
             } else {
                 $this->session->set_flashdata('error', 'Invalid username');
-                redirect(base_url('users/loginform'));
+                // redirect(base_url('users/loginform'));
+                $data['type']='user';
+                $data['error'] = 'Username or Password is incorrect';
+                $this->load->view('includes/header',$data);
+                $this->load->view('html/users/login', $data);
             }
         }
     }
@@ -196,5 +200,62 @@ class Users extends CI_Controller
         $this->session->unset_userdata('username');
         $this->session->unset_userdata('email');
         redirect(base_url('login/form'));
+    }
+    public function resetpasswordform()
+    {
+
+        $data['type'] = 'user';
+        $this->load->view('includes/header', $data);
+        $this->load->view('html/users/resetpassword');
+        $this->load->view('includes/footer');
+    }
+    public function getUserByEmailForResetPassword()
+    {
+        $email = $this->input->post('email');
+        $users = new UsersModel();
+        $user = $users->get_user_by_email($email);
+        if ($user[0]) {
+            $this->load->library('email');
+            $this->email->from('precieuxmugisha@gmail.com', 'Squares reset password');
+            $this->email->to($email);
+            $this->email->subject('Squares reset password wizard');
+            $this->email->message('Hello ' . $user[1]->firstname . ' ' . $user[1]->lastname . 'Your reset password code is ' . $user[1]->user_id, 'Please click on the link below to reset your password: ' . base_url() . 'resetpassword/verify/' . $user[1]->user_id . '. If you did not request password reset please ignore this email');
+            $this->email->send();
+            var_dump($this->email->send());
+            if ($this->email->send()) {
+                echo "Sent";
+            } else {
+                echo "Not sent";
+            }
+            return $user;
+        } else {
+            echo 'User not found';
+            $data['error'] = 'User not found';
+            $this->load->view('html/users/resetpassword', $data);
+            // return false;
+        }
+    }
+    public function resetpassword()
+    {
+        $this->load->library('session');
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[8]|max_length[20]');
+        $this->form_validation->set_rules('confirmpassword', 'Confirm Password', 'required|trim|min_length[8]|max_length[20]|matches[password]');
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('html/users/resetpassword');
+        } else {
+            $user_id = $this->input->post('user_id');
+            $password = $this->input->post('password');
+            $users = new UsersModel();
+            $res = $users->reset_password($user_id, $password);
+            if ($res[0]) {
+                $this->session->set_flashdata('msg', 'Password updated successfully');
+                redirect(base_url('login/form'));
+            } else {
+                $data['error'] = $res[1];
+                $this->session->set_flashdata('error', 'Password update failed');
+                redirect(base_url('resetpassword/verify/' . $user_id));
+            }
+        }
     }
 }

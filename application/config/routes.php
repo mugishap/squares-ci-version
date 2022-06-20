@@ -103,4 +103,11 @@ $route['logout'] = "users/logout";
 $route['update/form'] = "users/updateaccountform";
 
 //reset password views
-$route['resetpassword/home'] = "users/resetpassword";
+$route['resetpassword/home'] = "users/resetpasswordform";
+
+//reset password after email valiadation
+$route['resetpassword/verify/(:any)'] = "users/resetpassword/$1";
+
+//get user by email for reset password
+$route['resetpassword/getuser'] = "users/getUserByEmailForResetPassword";
+
