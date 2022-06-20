@@ -15,7 +15,7 @@ class UsersModel extends CI_Model
         $this->form_validation->set_rules('firstname', 'First Name', 'trim|required|min_length[3]|max_length[20]');
         $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|min_length[3]|max_length[20]');
         $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]|max_length[15]|is_unique[users.username]|alpha_numeric');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|unique');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[15]');
         $this->form_validation->set_rules('cpassword', 'Confirm Password', 'matches[password]');
         if ($this->form_validation->run() == FALSE) {
@@ -72,7 +72,7 @@ class UsersModel extends CI_Model
     }
     public function get_user_by_username($username)
     {
-        $this->load->libraries('form_validation');
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]|max_length[15]|alpha_numeric');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('error', 'Please fill in all the fields');

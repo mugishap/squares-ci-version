@@ -57,10 +57,12 @@ class Users extends CI_Controller
         $status = $data['user'][0];
         if ($status) {
             $userid = $data['user'][1];
-            //    $user =  $users->get_user($userid);
             $res = $users->loginAfterSignup($this->input->post('username'), $this->input->post('password'));
             if ($res) {
                 redirect('/products');
+            }
+            else{
+                echo "Error";
             }
         } else {
             $error = $data['user'][1];
