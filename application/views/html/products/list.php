@@ -14,16 +14,15 @@
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <img class="navbar-header" width=70 height=50 src="<?=base_url('assets/logo.png')?>" alt="">
-            <div class="navbar-header mr-5">
+            <div class="navbar-header">
                 <a class="navbar-brand" href="<?= base_url() ?>">Squares</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class=""><a href="#">Home</a></li>
-                <li><a href="<?= base_url('users') ?>">Users</a></li>
+                <li class=""><a href="<?= base_url('users') ?>">Users</a></li>
                 <li class="active"><a href="<?= base_url('products') ?>">Products</a></li>
                 <li><a href="<?= base_url() . 'user/' . $this->session->userdata('user_id') ?>">Account</a></li>
-                <li><a class="btn btn-primary" href="<?= base_url('logout') ?>">Logout</a></li>
+                <li><a class="" href="<?= base_url('logout') ?>"><button class="btn btn-primary">Logout</button></a></li>
             </ul>
         </div>
     </nav>

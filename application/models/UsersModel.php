@@ -37,18 +37,26 @@ class UsersModel extends CI_Model
     }
     public function update_user($id)
     {
-        if (!empty(trim($this->input->post("firstname"))) || !empty(trim($this->input->post("lastname"))) || !empty(trim($this->input->post("username")))  || !empty($this->input->post("email"))) {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('firstname', 'First Name', 'trim|required|min_length[3]|max_length[20]');
+        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|min_length[3]|max_length[20]');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]|max_length[15]|alpha_numeric');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', 'Please fill in all the fields');
+            return [false, $this->form_validation->error_array()];
+        } else {
+
             $data = [
                 'firstname' => $this->input->post('firstname'),
                 'lastname' => $this->input->post('lastname'),
                 'username' => $this->input->post('username'),
                 'email' => $this->input->post('email'),
             ];
-
             $this->db->where('user_id', $id);
-            return $this->db->update('users', $data);
-        } else {
-            return false;
+            $this->db->update('users', $data);
+            return [true, $id];
         }
     }
     public function delete_user($id)
